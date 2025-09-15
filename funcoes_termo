@@ -1,23 +1,25 @@
 from bibliotecas_termo import biblioteca_br
 def erro(palavra):
     dicc = {}
-    for i in palavra:
+    for l in palavra:
         dicc[i] = 0
-    for i in palavra:
+    for l in palavra:
         dicc[i] += 1
     return dicc
 
 def letra_letra(palavra,p):
     lista_final=[]
     c = erro(p)
-    lista = [*range(len(p))]
-    for letra in palavra:
-        for i in lista:
-            if palavra[i] == p[i] and palavra[i] == letra:
-                lista_final.append('\x1b[32m'+ palavra[i])
-                c[palavra[i]] -= 1
-                lista.remove(i)
+    lista = list(range(len(p)))
+    i = 0
+    while True:
+        if palavra[i] == p[i] and palavra[i] == letra:
+            lista_final.append('\x1b[32m'+ palavra[i])
+            c[palavra[i]] -= 1
+            lista.remove(i)
+        if i >= len(lista):
                 break
+        i += 1
     for i in lista:
         if palavra[i] in p and c[palavra[i]] > 0:
             lista_final.append('\x1b[33m'+ palavra[i])
